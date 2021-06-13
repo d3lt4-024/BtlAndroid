@@ -1,0 +1,46 @@
+package com.example.musicappbtl.Fragment;
+
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.musicappbtl.R;
+import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class Fragment_Dia_Nhac extends Fragment {
+
+    View view;
+    CircleImageView circleImageView;
+    public ObjectAnimator objectAnimator;
+
+    @Nullable
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_dia_nhac, container, false);
+        circleImageView = view.findViewById(R.id.imageviewcircle);
+        objectAnimator = ObjectAnimator.ofFloat(circleImageView, "rotation", 0f, 360f);
+        objectAnimator.setDuration(10000);
+        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        objectAnimator.setRepeatMode(ValueAnimator.RESTART);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
+        return view;
+    }
+
+    public void PlayNhac(String hinhanh) {
+        Picasso.with(getActivity()).load(hinhanh).into(circleImageView);
+    }
+}
